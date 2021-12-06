@@ -4,7 +4,6 @@ const commandHandler = require('./src/commands-helper');
 const main = () => {
     commandHandler.registrateCommands('initTgBot', initTgBot);
     commands = process.argv.slice(2);
-    console.log(commands);
     commandHandler.handleArgs(commands);
     process.stdin.resume();
 }

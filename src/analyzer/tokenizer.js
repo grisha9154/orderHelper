@@ -6,6 +6,7 @@ class Tokenizer {
     _tokenizers = [
         this._commandAddToken,
         this._commandCalcCostToken,
+        this._commandRreadToken,
         this._weightToken,
         this._costToken,
         this._orderToken,

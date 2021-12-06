@@ -6,6 +6,7 @@ class TokenHandler {
     _handlers = {
         [TokenNames.command_add]: this._add.bind(this),
         [TokenNames.command_calc]: this._calc.bind(this),
+        [TokenNames.command_read]: this._read.bind(this),
     };
     
     handle(tokens) {
@@ -30,6 +31,12 @@ class TokenHandler {
         const entity = tokens.shift();
         const params = this._getParams(tokens);
         const command = new Command('calc', entity, params);
+        return new CommandExecuter().exec(command);
+    }
+
+    _read(tokens) {
+        const entity = tokens.shift();
+        const command = new Command('read', entity, null);
         return new CommandExecuter().exec(command);
     }
 
