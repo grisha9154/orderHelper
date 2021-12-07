@@ -4,7 +4,7 @@ const roundCost = require("../utils/round-cost");
 const execReadCostGoods = () => {
     const costGoods = costGoodsCRUD.read();
     return costGoods.map(good => {
-        return `${roundCost(good.name)} ${roundCost(good.cost)}р`;
+        return `${good.name} ${roundCost(good.cost)}р`;
     }).join('\n');
 };
 
