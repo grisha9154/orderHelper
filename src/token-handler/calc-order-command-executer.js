@@ -1,6 +1,7 @@
 const calcOrder = require("../utils/calc-order");
 const costGoodsCRUD = require('../crud/cost-goodsCRUD');
 const Utils = require('../utils');
+const roundCost = require("../utils/round-cost");
 
 const mapWeight = (weightText) => {
     const match = weightText.match(Utils.weightRegex);
@@ -34,7 +35,7 @@ const mapParam = (param) => {
 
 const execCalcOrderCommand = (params) => {
     const order = calcOrder(params.map(mapParam));
-    return `Стоимость заказа ${order.totalCost}р\nСебестоимость ${order.totalCostGoods}р.\nПрибыль ${order.freeMony}р`;
+    return `Стоимость заказа ${roundCost(order.totalCost)}р\nСебестоимость ${roundCost(order.totalCostGoods)}р.\nПрибыль ${roundCost(order.freeMony)}р`;
 }
 
 module.exports = execCalcOrderCommand;

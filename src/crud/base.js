@@ -2,7 +2,8 @@ const fs = require('fs');
 
 class BaseCRUD {
     constructor(entityName) {
-        this._filePath = `.\\data\\${entityName}.json`;
+        const fileSeparator = process.platform === 'win32' ? '\\' : '/';
+        this._filePath = `.${fileSeparator}data${fileSeparator}${entityName}.json`;
     }
 
     create(json) {

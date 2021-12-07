@@ -1,9 +1,10 @@
 const costGoodsCRUD = require("../crud/cost-goodsCRUD");
+const roundCost = require("../utils/round-cost");
 
 const execReadCostGoods = () => {
     const costGoods = costGoodsCRUD.read();
     return costGoods.map(good => {
-        return `${good.name} ${good.cost}`;
+        return `${roundCost(good.name)} ${roundCost(good.cost)}р`;
     }).join('\n');
 };
 

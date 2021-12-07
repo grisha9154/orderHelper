@@ -1,6 +1,7 @@
 const costGoodsCRUD = require('../crud/cost-goodsCRUD');
 const OrderCRUD = require('../crud/orderCRUD');
 const Utils = require('../utils');
+const roundCost = require('../utils/round-cost');
 
 const mapWeight = (weightText) => {
     const match = weightText.match(Utils.weightRegex);
@@ -36,7 +37,7 @@ const execAddOrderCommand = (params) => {
     const mappedParams = params.map(mapParam);
     OrderCRUD.create(mappedParams);
     const lastOrder = OrderCRUD.read().pop();
-    return `Добавлен заказ.\nСтоимость заказа ${order.totalCost}р\nСебестоимость ${lastOrder.totalCostGoods}р.\nПрибыль ${lastOrder.freeMony}р`;
+    return `Добавлен заказ.\nСтоимость заказа ${roundCost(lastOrder.totalCost)}р\nСебестоимость ${roundCost(lastOrder.totalCostGoods)}р.\nПрибыль ${roundCost(lastOrder.freeMony)}р`;
 };
 
 module.exports = execAddOrderCommand;
