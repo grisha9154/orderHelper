@@ -7,6 +7,7 @@ class Tokenizer {
         this._commandAddToken,
         this._commandCalcCostToken,
         this._commandRreadToken,
+        this._commandUpdateToken,
         this._weightToken,
         this._costToken,
         this._orderToken,
@@ -35,6 +36,12 @@ class Tokenizer {
     _commandRreadToken(text) {
         if(text == 'покажи') {
             return new Token(TokenNames.command_read, text);
+        }
+    }
+
+    _commandUpdateToken(text){
+        if(text == 'обнови') {
+            return new Token(TokenNames.command_update, text);
         }
     }
 

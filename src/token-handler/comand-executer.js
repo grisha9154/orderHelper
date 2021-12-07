@@ -3,6 +3,7 @@ const execAddCostGoodsCommand = require("./add-cost-goods-command-executer");
 const execOrderAddCommand = require("./add-order-command-executer");
 const execCalcOrderCommand = require("./calc-order-command-executer");
 const execReadCostGoods = require("./read-cost-goods-executer");
+const execUpdateCostGoods = require("./update-cost-goods-executor");
 
 class CommandExecuter {
     _executors = {
@@ -10,6 +11,8 @@ class CommandExecuter {
         [`add_${TokenNames.entity_costGoods}`]: execAddCostGoodsCommand,
         [`calc_${TokenNames.entity_order}`]: execCalcOrderCommand,
         [`read_${TokenNames.entity_costGoods}`]: execReadCostGoods,
+        [`update_${TokenNames.entity_costGoods}`]: execUpdateCostGoods,
+
     };
 
     exec(command) {

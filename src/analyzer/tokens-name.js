@@ -2,6 +2,7 @@ const TokenNames = {
     command_add: 'command_add',
     command_read: 'command_read',
     command_calc: 'command_calc',
+    command_update: 'command_update',
 
     param_weight: 'param_weight',
     param_cost: 'param_cost',

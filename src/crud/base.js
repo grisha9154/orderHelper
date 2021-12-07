@@ -19,6 +19,14 @@ class BaseCRUD {
         const totalJSON = totalText === '' ? [] : JSON.parse(totalText);
         return totalJSON;
     }
+
+    update(item) {
+        const data = this.read();
+        const dataItem = data.find(x => x.name === item.name);
+        const index = data.indexOf(dataItem);
+        data[index] = item;
+        fs.writeFileSync(this._filePath, JSON.stringify(data));
+    }
 }
 
 module.exports = BaseCRUD;
