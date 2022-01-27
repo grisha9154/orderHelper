@@ -1,10 +1,5 @@
 module.exports = {
   entry: "./index.ts",
-  output: {
-    filename: "./bundle.js",
-    library: "OrderTraffic",
-    libraryTarget: "umd",
-  },
   resolve: {
     extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
     fallback: {
