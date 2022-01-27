@@ -1,5 +1,5 @@
-import CostGoodsCRUD, { CostGoodsEntity } from "../crud/cost-goodsCRUD";
-import { mapCost } from "../utils/map-const";
+import CostGoodsCRUD, { CostGoodsEntity } from "../../models/crud/cost-goodsCRUD";
+import { mapCost } from "../../utils/map-const";
 
 export interface Param {
     name: string;

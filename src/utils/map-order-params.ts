@@ -1,7 +1,7 @@
-import { OrderEntity } from "../crud/orderCRUD";
+import { OrderEntity } from "../models/crud/orderCRUD";
 import { mapCost } from "./map-const";
 import { mapWeight } from "./map-weght";
-import CostGoodsCRUD from "../crud/cost-goodsCRUD";
+import CostGoodsCRUD from "../models/crud/cost-goodsCRUD";
 
 export interface Param {
     name: string;

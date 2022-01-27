@@ -1,6 +1,6 @@
-import OrderCRUD from "../crud/orderCRUD";
-import { roundCost } from "../utils/round-cost";
-import { mapParams, Param } from "../utils/map-order-params";
+import OrderCRUD from "../../models/crud/orderCRUD";
+import { roundCost } from "../../utils/round-cost";
+import { mapParams, Param } from "../../utils/map-order-params";
 
 export const execOrderAddCommand = async (params: Param[]) => {
     const orderEntity = mapParams(params);

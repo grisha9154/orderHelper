@@ -1,4 +1,4 @@
-import { costUnitRegex, weightUnitRegex } from "../utils";
+import { costUnitRegex, weightUnitRegex } from "../../utils";
 import { Token } from "./token";
 import { TokenNames } from "./tokens-name";
 

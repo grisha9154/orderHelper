@@ -1,5 +1,5 @@
-import orderCRUD from "../crud/orderCRUD";
-import { roundCost } from "../utils/round-cost";
+import orderCRUD from "../../models/crud/orderCRUD";
+import { roundCost } from "../../utils/round-cost";
 
 export interface ICalcProfitParam {
     from?: Date;
