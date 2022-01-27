@@ -1,18 +1,19 @@
-const CommandExecuter = require('./comand-executer');
-const Command = require('./command');
-const TokenNames = require('../analyzer/tokens-name');
+import { Token } from "../analyzer/token";
+import { TokenNames } from "../analyzer/tokens-name";
+import { Command } from "./command";
+import CommandExecuter from "./comand-executer";
 
 class TokenHandler {
-    _handlers = {
-        [TokenNames.command_add]: this._add.bind(this),
-        [TokenNames.command_calc]: this._calc.bind(this),
-        [TokenNames.command_read]: this._read.bind(this),
-        [TokenNames.command_update]: this._update.bind(this),
+    private handlers: Record<string, (tokens: Token[]) => string>= {
+        [TokenNames.command_add]: this.add.bind(this),
+        [TokenNames.command_calc]: this.clack.bind(this),
+        [TokenNames.command_read]: this.read.bind(this),
+        [TokenNames.command_update]: this.update.bind(this),
     };
     
-    handle(tokens) {
+    handle(tokens: Token[]) {
         const token = tokens.shift();
-        const handler = this._handlers[token.type];
+        const handler = this.handlers[token.type];
         if(!handler) {
             console.log(`Invalid command name: ${token.type}`);
             throw Error(`Invalid command name: ${token.type}`);
@@ -21,34 +22,34 @@ class TokenHandler {
         return answer;
     }
 
-    _add(tokens) {
+    private add(tokens: Token[]) {
         const entity = tokens.shift();
-        const params = this._getParams(tokens);
+        const params = this.getParams(tokens);
         const command = new Command('add', entity, params);
-        return new CommandExecuter().exec(command);
+        return CommandExecuter.exec(command);
     }
 
-    _calc(tokens) {
+    private clack(tokens: Token[]) {
         const entity = tokens.shift();
-        const params = this._getParams(tokens);
+        const params = this.getParams(tokens);
         const command = new Command('calc', entity, params);
-        return new CommandExecuter().exec(command);
+        return CommandExecuter.exec(command);
     }
 
-    _read(tokens) {
+    private read(tokens: Token[]) {
         const entity = tokens.shift();
         const command = new Command('read', entity, null);
-        return new CommandExecuter().exec(command);
+        return CommandExecuter.exec(command);
     }
 
-    _update(tokens) {
+    private update(tokens: Token[]) {
         const entity = tokens.shift();
-        const params = this._getParams(tokens);
+        const params = this.getParams(tokens);
         const command = new Command('update', entity, params)
-        return new CommandExecuter().exec(command);
+        return CommandExecuter.exec(command);
     }
 
-    _getParams(tokens) {
+    private getParams(tokens: Token[]) {
         const params = [];
         let param = {
             name: '',
@@ -84,9 +85,8 @@ class TokenHandler {
                 }
             }
         }
-
         return params;
     }
 }
 
-module.exports = new TokenHandler();
+export default new TokenHandler();

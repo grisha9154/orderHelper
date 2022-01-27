@@ -1,4 +1,4 @@
-const TokenNames = {
+export const TokenNames = {
     command_add: 'command_add',
     command_read: 'command_read',
     command_calc: 'command_calc',
@@ -10,6 +10,7 @@ const TokenNames = {
 
     entity_order: 'entity_order',
     entity_costGoods: 'entity_costGoods',
+    entity_profit: 'entity_profit',
 };
 
 const TokenWords = {
@@ -24,5 +25,3 @@ const TokenWords = {
     entity_order: 'заказ',
     entity_costGoods: 'себестоимость',
 }
-
-module.exports = TokenNames;
