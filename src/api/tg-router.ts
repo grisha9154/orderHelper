@@ -14,7 +14,6 @@ export const tgRouter: RequestHandler = async (req, res) => {
       text: answer,
     });
   } catch (error) {
-    const message = `Error with send`;
     console.error(error);
   }
 
