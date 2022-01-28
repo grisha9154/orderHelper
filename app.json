@@ -1,0 +1,7 @@
+{
+    "name": "OrderTrafic",
+    "description": "app for tg bot",
+    "repository": "https://github.com/grisha9154/orderHelper",
+    "keywords": ["node", "typescript", "express", "heroku"]
+  }
+  
