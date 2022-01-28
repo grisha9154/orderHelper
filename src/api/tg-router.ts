@@ -5,17 +5,20 @@ import { messageService } from "../services/message-handler";
 const url = "https://api.telegram.org/bot";
 const token = process.env.tg_bot_token;
 
+
 export const tgRouter: RequestHandler = async (req, res) => {
   const { chat, text } = req.body.message;
+  const sendAswer = (answer: String) => axios.post(`${url}${token}/sendMessage`, {
+    chat_id: chat.id,
+    answer,
+  })
   try {
     const answer = await messageService.handelMessage(text);
-    console.log(`Ответ: ${answer}`);
-    await axios.post(`${url}${token}/sendMessage`, {
-      chat_id: chat.id,
-      answer,
-    });
+    await sendAswer(answer);
   } catch (error) {
-    console.error(`Error with send answer`);
+    const message = `Error with send`
+    console.error(message);
+    await sendAswer(message);
   }
 
   res.status(200).send({});
