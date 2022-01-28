@@ -1,11 +1,11 @@
 {
-  "name": "node-with-ts",
+  "name": "with-ts",
   "version": "1.0.0",
-  "main": "index.ts",
-  "script": {
-    "start": "ts-node src/app.ts",
-    "Build": "tsc",
-    "dev": "nodemon -x ts-node src/app.ts"
+  "main": "./dist/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "build": "tsc",
+    "dev": "nodemon"
   },
   "dependencies": {
     "@types/express": "^4.17.13",
