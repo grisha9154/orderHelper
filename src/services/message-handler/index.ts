@@ -3,12 +3,15 @@ import tokenHandler from "../token-handler";
 
 const handelMessage = async (text: string) => {
   try {
-      const tokens = analyzer.readLine(text);
-      const answer = await tokenHandler.handle(tokens);
+    const tokens = analyzer.readLine(text);
+    const answer = await tokenHandler.handle(tokens);
 
-      return answer;
+    return answer;
   } catch (error: any) {
-    return `Ошибка! ${error.message}`;
+    const message = `Ошибка! ${error.message}`;
+    console.error(message);
+
+    return message;
   }
 };
 
