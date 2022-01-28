@@ -1,4 +1,4 @@
-import { fireStore } from "../db-connection/firestore";
+
 import { IBaseEntity } from "./base-entity";
 
 export class BaseCRUD<T extends IBaseEntity> {
@@ -16,8 +16,8 @@ export class BaseCRUD<T extends IBaseEntity> {
   }
 
   public async read(): Promise<T[]> {
-    const data = fireStore.read(this.entityName)
-    return data as any;
+    //const data = fireStore.read(this.entityName)
+    return [];
   }
 
   public update(item: T): void {

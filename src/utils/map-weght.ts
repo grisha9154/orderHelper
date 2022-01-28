@@ -1,11 +1,11 @@
 import { weightUnitRegex } from ".";
 
 export const mapWeight = (weightText: string) => {
-    const match = weightText.match(weightUnitRegex);
-    const { unit, count } = match.groups;
-    if (unit === 'кг'){
-        return Number(count.replace(/,/g, '.')) * 1000;
-    } else {
-        return Number(count.replace(/,/g, '.'));
-    }
+  const match = weightText.match(weightUnitRegex);
+  if (match === null) {
+    throw new Error("Не верный формат записи веса");
+  }
+  const { count } = match.groups!;
+
+  return Number(count.replace(/,/g, "."));
 };

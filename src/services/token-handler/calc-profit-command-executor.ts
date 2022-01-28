@@ -6,7 +6,7 @@ export interface ICalcProfitParam {
     to?: Date;
 }
 
-export const execCalcProfitCommand = (_param): string => {
+export const execCalcProfitCommand = (_param: any): string => {
     const orders = orderCRUD.read();
 
     // const freeMonyTotal = orders.reduce((agg, order) => {
