@@ -4,7 +4,7 @@
   "main": "index.ts",
   "script": {
     "start": "node ./dist/app.js",
-    "build": "tsc",
+    "Build": "tsc",
     "dev": "nodemon"
   },
   "dependencies": {
