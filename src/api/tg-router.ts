@@ -15,7 +15,7 @@ export const tgRouter: RequestHandler = async (req, res) => {
     });
   } catch (error) {
     const message = `Error with send`;
-    console.error(message);
+    console.error(error);
   }
 
   res.status(200).send({});
