@@ -11,7 +11,7 @@ export const tgRouter: RequestHandler = async (req, res) => {
     const answer = await messageService.handelMessage(text);
     await axios.post(`${url}${token}/sendMessage`, {
       chat_id: chat.id,
-      answer,
+      text: answer,
     });
   } catch (error) {
     const message = `Error with send`;
