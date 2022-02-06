@@ -1,5 +1,6 @@
 
 import { IBaseEntity } from "./base-entity";
+import { pool } from "../db-connection";
 
 export class BaseCRUD<T extends IBaseEntity> {
   private entityName: string;
@@ -16,8 +17,9 @@ export class BaseCRUD<T extends IBaseEntity> {
   }
 
   public async read(): Promise<T[]> {
-    //const data = fireStore.read(this.entityName)
-    return [];
+    const client = await pool.connect();
+    const result = await client.query('select * from test_table');
+    return result ? result.rows : [];
   }
 
   public update(item: T): void {
