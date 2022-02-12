@@ -1,7 +1,6 @@
-import { OrderEntity } from "../models/crud/orderCRUD";
+import { CostGoods } from "../models/cost-goods";
 import { mapCost } from "./map-const";
 import { mapWeight } from "./map-weght";
-import CostGoodsCRUD from "../models/crud/cost-goodsCRUD";
 
 export interface Param {
     name: string;
@@ -9,12 +8,12 @@ export interface Param {
     cost: string;
 }
 
-export const mapParams = async (params: Param[]): Promise<OrderEntity> => {
+export const mapParams = async (params: Param[]): Promise<any> => {
     const weightMap: Record<string, number> = {};
     const costMap: Record<string, number> = {};
     const costGoodsMap: Record<string, number> = {};
     const freeMonyMap: Record<string, number> = {};
-    const costGoods = await CostGoodsCRUD.read();
+    const costGoods = await CostGoods.findAll();
 
     params.forEach((param) => {
         const { name, weight, cost } = param;

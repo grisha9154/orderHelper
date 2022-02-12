@@ -9,12 +9,12 @@ import { execUpdateCostGoods } from "./update-cost-goods-executor";
 
 class CommandExecuter<TParam> {
   private executors: Record<string, (params: any) => Promise<string>> = {
-    // [`add_${TokenNames.entity_order}`]: execOrderAddCommand,
-    // [`calc_${TokenNames.entity_order}`]: execCalcOrderCommand,
-    // [`add_${TokenNames.entity_costGoods}`]: execAddCostGoodsCommand,
+    [`add_${TokenNames.entity_order}`]: execOrderAddCommand,
+    [`calc_${TokenNames.entity_order}`]: execCalcOrderCommand,
+    [`add_${TokenNames.entity_costGoods}`]: execAddCostGoodsCommand,
     [`read_${TokenNames.entity_costGoods}`]: execReadCostGoods,
-    // [`update_${TokenNames.entity_costGoods}`]: execUpdateCostGoods,
-    // [`calc_${TokenNames.entity_profit}`]: execCalcProfitCommand,
+    [`update_${TokenNames.entity_costGoods}`]: execUpdateCostGoods,
+    [`calc_${TokenNames.entity_profit}`]: execCalcProfitCommand,
   };
 
   public exec(command: Command<TParam[] | null>) {

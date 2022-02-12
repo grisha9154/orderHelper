@@ -13,6 +13,7 @@ export const tgRouter: RequestHandler = async (req, res) => {
       chat_id: chat.id,
       text: answer,
     });
+    console.log('Answer: ', answer);
   } catch (error) {
     console.error(error);
   }

@@ -1,4 +1,4 @@
-import CostGoodsCRUD, { CostGoodsEntity } from "../../models/crud/cost-goodsCRUD";
+import { CostGoods } from "../../models/cost-goods";
 import { mapCost } from "../../utils/map-const";
 
 export interface Param {
@@ -6,7 +6,7 @@ export interface Param {
     cost: string;
 }
 
-const mapParam = (param: Param): CostGoodsEntity => {
+const mapParam = (param: Param): any => {
     const cost = mapCost(param.cost);
     return {
         name: param.name,
@@ -14,11 +14,11 @@ const mapParam = (param: Param): CostGoodsEntity => {
     };
 }
 
-export const execAddCostGoodsCommand = (params: Param[]): string => {
-    params.forEach((param) => {
+export const execAddCostGoodsCommand = async (params: Param[]): Promise<string> => {
+    Promise.all(params.map((param) => {
         const good = mapParam(param);
-        CostGoodsCRUD.create(good);
-    });
+        return CostGoods.create(good);
+    }));
 
     return `Добавлена себестоимость.`;
 }

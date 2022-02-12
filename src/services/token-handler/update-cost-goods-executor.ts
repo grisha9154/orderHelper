@@ -1,4 +1,4 @@
-import CostGoodsCRUD from "../../models/crud/cost-goodsCRUD";
+import { CostGoods } from "../../models/cost-goods";
 import { mapCost } from "../../utils/map-const";
 
 export interface Param {
@@ -16,7 +16,7 @@ const mapParam = (param: Param) => {
 
 const updateCostGoods = async (param: Param) => {
   const { name, cost } = mapParam(param);
-  const goods = await CostGoodsCRUD.read();
+  const goods = await CostGoods.findAll();
 
   const good = goods.find((item) => item.name === name);
 
@@ -26,10 +26,10 @@ const updateCostGoods = async (param: Param) => {
 
   good.cost = cost ? cost : good.cost;
 
-  CostGoodsCRUD.update(good);
+  return good.save();
 };
 
-export const execUpdateCostGoods = (params: Param[]) => {
-  params.forEach(updateCostGoods);
+export const execUpdateCostGoods = async (params: Param[]) => {
+  await Promise.all(params.map(updateCostGoods));
   return "Обнавлено успешно";
 };

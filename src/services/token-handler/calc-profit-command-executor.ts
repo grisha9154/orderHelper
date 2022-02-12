@@ -1,4 +1,4 @@
-import orderCRUD from "../../models/crud/orderCRUD";
+import { Order } from '../../models/order';
 import { roundCost } from "../../utils/round-cost";
 
 export interface ICalcProfitParam {
@@ -6,14 +6,13 @@ export interface ICalcProfitParam {
     to?: Date;
 }
 
-export const execCalcProfitCommand = (_param: any): string => {
-    const orders = orderCRUD.read();
+export const execCalcProfitCommand = async (_param: any) => {
+    const orders = await Order.findAll();
 
-    // const freeMonyTotal = orders.reduce((agg, order) => {
-    //     return agg + order.freeMony;
-    // },
-    // 0);
-    const freeMonyTotal = 0;
+    const freeMonyTotal = orders.reduce((agg, order) => {
+        return agg + order.freeMony;
+    },
+    0);
 
     return `Прибыль за период: ${roundCost(freeMonyTotal)}р`;
 };
