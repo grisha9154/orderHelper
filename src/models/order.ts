@@ -15,15 +15,15 @@ Order.init({
         allowNull: false,
     },
     cost: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
     costGoods: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
     freeMony: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
     date: {

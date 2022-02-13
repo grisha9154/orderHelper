@@ -13,7 +13,7 @@ CostGoods.init({
         allowNull: false,
     },
     cost: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
     }
 }, { sequelize: connection.connection });
