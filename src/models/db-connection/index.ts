@@ -21,6 +21,7 @@ class DbConnector {
       dialectOptions: {
         ssl: {
           require: false,
+          rejectUnauthorized: false,
         },
       },
     });
