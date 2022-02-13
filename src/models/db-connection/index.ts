@@ -9,7 +9,7 @@ class DbConnector {
 
   public async init(): Promise<void> {
     await this._connection.authenticate();
-    await this._connection.sync({ force: true });
+    await this._connection.sync({ force: false });
   }
 
   public get connection(): Sequelize {
