@@ -14,5 +14,15 @@ export const execCalcProfitCommand = async (_param: any) => {
     },
     0);
 
-    return `Прибыль за период: ${roundCost(freeMonyTotal)}р`;
+    const monyTotal = orders.reduce((agg, order) => {
+        return agg + order.cost;
+    },
+    0);
+
+    const costOfGoodsTotal = orders.reduce((agg, order) => {
+        return agg + order.costGoods;
+    },
+    0);
+
+    return `Оборот: ${monyTotal}р\nПрибыль за период: ${roundCost(freeMonyTotal)}р\nРасходы: ${costOfGoodsTotal}р`;
 };

@@ -8,11 +8,14 @@ class Tokenizer {
     this._commandCalcCostToken,
     this._commandRreadToken,
     this._commandUpdateToken,
+    this._commandRemoveToken,
+
     this._weightToken,
     this._costToken,
     this._orderToken,
     this._profitToken,
     this._costGoodsToken,
+
     this._textToken,
   ];
 
@@ -88,6 +91,12 @@ class Tokenizer {
   _commandCalcCostToken(text: string) {
     if (text == "посчитай") {
       return new Token(TokenNames.command_calc, text);
+    }
+  }
+
+  _commandRemoveToken(text: string) {
+    if (text === "удали") {
+      return new Token(TokenNames.command_remove, text);
     }
   }
 }

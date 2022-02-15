@@ -3,6 +3,7 @@ export const TokenNames = {
     command_read: 'command_read',
     command_calc: 'command_calc',
     command_update: 'command_update',
+    command_remove: 'command_remove',
 
     param_weight: 'param_weight',
     param_cost: 'param_cost',
