@@ -9,20 +9,20 @@ export interface ICalcProfitParam {
 export const execCalcProfitCommand = async (_param: any) => {
     const orders = await Order.findAll();
 
-    const freeMonyTotal = orders.reduce((agg, order) => {
+    const freeMonyTotal = roundCost(orders.reduce((agg, order) => {
         return agg + order.freeMony;
     },
-    0);
+    0));
 
-    const monyTotal = orders.reduce((agg, order) => {
+    const monyTotal = roundCost(orders.reduce((agg, order) => {
         return agg + order.cost;
     },
-    0);
+    0));
 
-    const costOfGoodsTotal = orders.reduce((agg, order) => {
+    const costOfGoodsTotal = roundCost(orders.reduce((agg, order) => {
         return agg + order.costGoods;
     },
-    0);
+    0));
 
-    return `Оборот: ${monyTotal}р\nПрибыль за период: ${roundCost(freeMonyTotal)}р\nРасходы: ${costOfGoodsTotal}р`;
+    return `Оборот: ${monyTotal}р\nПрибыль за период: ${freeMonyTotal}р\nРасходы: ${costOfGoodsTotal}р`;
 };
