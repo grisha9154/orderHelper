@@ -1,5 +1,6 @@
 import { Order } from '../../models/order';
 import { roundCost } from "../../utils/round-cost";
+import { Op } from "sequelize"; 
 
 export interface ICalcProfitParam {
     from?: Date;
@@ -7,7 +8,17 @@ export interface ICalcProfitParam {
 }
 
 export const execCalcProfitCommand = async (_param: any) => {
-    const orders = await Order.findAll();
+    var date = new Date();
+    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const orders = await Order.findAll({
+        where: {
+            createdAt: {
+                [Op.gt]: firstDay,
+                [Op.lt]: lastDay,
+            }
+        }
+    });
 
     const freeMonyTotal = roundCost(orders.reduce((agg, order) => {
         return agg + order.freeMony;
