@@ -1,6 +1,6 @@
 import { roundCost } from "../../utils/round-cost";
 import { mapParams, Param } from "../../utils/map-order-params";
-import { Order } from "../../models/order";
+import { Order } from "../../data-base/models/order";
 
 export const execOrderAddCommand = async (params: Param[]) => {
     const orderEntity = await mapParams(params);

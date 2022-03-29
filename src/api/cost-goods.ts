@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { CostGoods } from '../models/cost-goods';
+import { CostGoods } from '../data-base/models/cost-goods';
 
 export const costGoodsRouter: RequestHandler = async (_req, res) => {
     try {

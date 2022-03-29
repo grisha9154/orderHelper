@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { tgRouter, uploadDataRouter, costGoodsRouter } from "./api";
-import { connection } from "./models/db-connection";
+import { connection } from "./data-base/models/db-connection";
 
 const app = express();
 const port = process.env.PORT || 5000;

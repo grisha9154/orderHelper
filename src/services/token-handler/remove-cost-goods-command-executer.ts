@@ -1,4 +1,4 @@
-import { CostGoods } from "../../models/cost-goods";
+import { CostGoods } from "../../data-base/models/cost-goods";
 
 export interface Param {
   name: string;

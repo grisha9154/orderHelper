@@ -1,4 +1,4 @@
-import { Order } from '../../models/order';
+import { Order } from '../../data-base/models/order';
 import { roundCost } from "../../utils/round-cost";
 import { Op } from "sequelize"; 
 
