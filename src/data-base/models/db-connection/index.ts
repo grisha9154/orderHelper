@@ -27,7 +27,12 @@ class DbConnector {
 
   private createInstance() {
     return new Sequelize(process.env.DATABASE_URL as string, {
-      dialectOptions: {},
+      dialectOptions: {
+        ssl: {
+          require: false,
+          rejectUnauthorized: false,
+        },
+      },
     });
   }
 }
