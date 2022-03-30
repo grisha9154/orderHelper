@@ -1,5 +1,7 @@
+require('dotenv').config();
 import express from "express";
 import bodyParser from "body-parser";
+
 import { tgRouter, uploadDataRouter, costGoodsRouter } from "./api";
 import { connection } from "./data-base/models/db-connection";
 
