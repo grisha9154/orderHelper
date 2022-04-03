@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 app.post("/tgbot", tgRouter);
 app.post("/upload", uploadDataRouter);
-app.get("/cost-goods", costGoodsRouter);
+costGoodsRouter(app);
 
 connection.init().then(() => {
   app.listen(port, () => {

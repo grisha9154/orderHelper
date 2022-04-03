@@ -3,6 +3,7 @@ import { connection } from "./db-connection";
 
  
 export class CostGoods extends Model {
+    declare id: string;
     declare name: string;
     declare cost: number;
     declare originCost: number;
