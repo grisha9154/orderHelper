@@ -9,6 +9,7 @@ class TokenHandler {
     [TokenNames.command_calc]: this.clack.bind(this),
     [TokenNames.command_read]: this.read.bind(this),
     [TokenNames.command_update]: this.update.bind(this),
+    [TokenNames.command_remove]: this.delete.bind(this),
   };
 
   public async handle(tokens: Token[]) {
@@ -65,6 +66,17 @@ class TokenHandler {
     }
     const params = this.getParams(tokens);
     const command = new Command("update", entity, params);
+
+    return CommandExecuter.exec(command);
+  }
+
+  private delete(tokens: Token[]) {
+    const entity = tokens.shift();
+    if (!entity) {
+      throw new Error("Не указана сущность для удаления");
+    }
+    const params = this.getParams(tokens);
+    const command = new Command("remove", entity, params);
 
     return CommandExecuter.exec(command);
   }
