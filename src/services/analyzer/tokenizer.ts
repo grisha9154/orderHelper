@@ -52,6 +52,18 @@ class Tokenizer {
     }
   }
 
+  _commandCalcCostToken(text: string) {
+    if (text == "посчитай") {
+      return new Token(TokenNames.command_calc, text);
+    }
+  }
+
+  _commandRemoveToken(text: string) {
+    if (text === "удали") {
+      return new Token(TokenNames.command_remove, text);
+    }
+  }
+
   _weightToken(text: string) {
     if (weightUnitRegex.test(text)) {
       return new Token(TokenNames.param_weight, text);
@@ -61,12 +73,6 @@ class Tokenizer {
   _costToken(text: string) {
     if (costUnitRegex.test(text)) {
       return new Token(TokenNames.param_cost, text);
-    }
-  }
-
-  _textToken(text: string) {
-    if (/[а-яА-Я]*/.test(text)) {
-      return new Token(TokenNames.param_text, text);
     }
   }
 
@@ -88,15 +94,9 @@ class Tokenizer {
     }
   }
 
-  _commandCalcCostToken(text: string) {
-    if (text == "посчитай") {
-      return new Token(TokenNames.command_calc, text);
-    }
-  }
-
-  _commandRemoveToken(text: string) {
-    if (text === "удали") {
-      return new Token(TokenNames.command_remove, text);
+  _textToken(text: string) {
+    if (/[а-яА-Я]*/.test(text)) {
+      return new Token(TokenNames.param_text, text);
     }
   }
 }
