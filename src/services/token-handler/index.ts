@@ -75,7 +75,7 @@ class TokenHandler {
     if (!entity) {
       throw new Error("Не указана сущность для удаления");
     }
-    const params = this.getParams(tokens);
+    const params = tokens.map((t) => ({ name: t.text }));
     const command = new Command("remove", entity, params);
 
     return CommandExecuter.exec(command);

@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import { Options, Sequelize } from "sequelize";
 
 class DbConnector {
   private _connection: Sequelize;
@@ -17,14 +17,21 @@ class DbConnector {
   }
 
   private createInstance() {
-    return new Sequelize(process.env.DATABASE_URL as string, {
-      dialectOptions: {
-        ssl: {
-          require: false,
-          rejectUnauthorized: false,
-        },
-      },
-    });
+    const options: Options | undefined =
+      process.env.DEV === "true"
+        ? {
+            dialectOptions: {
+            },
+          }
+        : {
+            dialectOptions: {
+              ssl: {
+                require: false,
+                rejectUnauthorized: false,
+              },
+            },
+          };
+    return new Sequelize(process.env.DATABASE_URL as string, options);
   }
 }
 
