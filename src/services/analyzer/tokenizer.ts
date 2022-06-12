@@ -15,6 +15,7 @@ class Tokenizer {
     this._orderToken,
     this._profitToken,
     this._costGoodsToken,
+    this._dateRangeToken,
 
     this._separatorToken,
 
@@ -103,6 +104,14 @@ class Tokenizer {
     if (text == TokenWords.entity_costGoods) {
       return new Token(TokenNames.entity_costGoods, text);
     }
+  }
+
+  _dateRangeToken(text: string) {
+    const hasDatate = new RegExp('\\d\\d(.|,)\\d\\d(.|,)\\d\\d\\d\\d').test(text);
+    if (hasDatate) {
+      return new Token(TokenNames.param_date_range, text);
+    }
+     
   }
 
   _textToken(text: string) {

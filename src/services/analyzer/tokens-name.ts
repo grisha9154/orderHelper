@@ -8,6 +8,7 @@ export const TokenNames = {
   param_weight: "param_weight",
   param_cost: "param_cost",
   param_text: "param_text",
+  param_date_range: "param_date_range",
 
   entity_order: "entity_order",
   entity_costGoods: "entity_costGoods",

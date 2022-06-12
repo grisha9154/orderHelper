@@ -2,6 +2,7 @@ import { Token } from "../analyzer/token";
 import { TokenNames } from "../analyzer/tokens-name";
 import { Command } from "./command";
 import CommandExecuter from "./comand-executer";
+import { ICalcProfitParam } from "./calc-profit-command-executor";
 
 class TokenHandler {
   private handlers: Record<string, (tokens: Token[]) => Promise<string>> = {
@@ -43,7 +44,7 @@ class TokenHandler {
     if (!entity) {
       throw new Error("Не указана сущность для посчитай");
     }
-    const params = this.getParams(tokens);
+    const params = this.getCalcProfitParams(tokens);
     const command = new Command("calc", entity, params);
 
     return CommandExecuter.exec(command);
@@ -100,6 +101,27 @@ class TokenHandler {
     })
 
     return result;
+  }
+
+  private getCalcProfitParams(tokens: Token[]) {
+    const dateRange = tokens.shift();
+    const param: ICalcProfitParam = {
+      from: undefined,
+      to: undefined,
+    };
+
+    if (dateRange?.type === TokenNames.param_date_range) {
+      const [fd, fm, fy] = dateRange.text.slice(0,10).split(/[.,]/g);
+      if (fd && fm && fy) {
+        param.from = new Date(Number(fy), Number(fm), Number(fd));
+      }
+      const [td, tm, ty] = dateRange.text.slice(11,21).split(/[.,]/g);
+      if (td && tm && ty) {
+        param.to = new Date(Number(ty), Number(tm), Number(td)); 
+      }
+    }
+
+    return param;
   }
 
   private getParams(tokens: Token[]) {

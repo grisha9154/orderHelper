@@ -7,10 +7,14 @@ export interface ICalcProfitParam {
     to?: Date;
 }
 
-export const execCalcProfitCommand = async (_param: any) => {
+export const execCalcProfitCommand = async (param: ICalcProfitParam) => {
     var date = new Date();
-    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    var firstDay = param.from 
+        ? param.from
+        : new Date(date.getFullYear(), date.getMonth(), 1);
+    var lastDay = param.to 
+        ? param.to 
+        : new Date(date.getFullYear(), date.getMonth() + 1, 0);
     const orders = await Order.findAll({
         where: {
             createdAt: {
