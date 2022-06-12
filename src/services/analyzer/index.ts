@@ -1,4 +1,5 @@
 import Tokenizer from "./tokenizer";
+import { TokenWords } from "./tokens-name";
 
 class Analyzer {
     public readLine(text: string) {
@@ -8,7 +9,7 @@ class Analyzer {
     }
 
     public normalize(text: string): string {
-        return text.toLowerCase().replace(/\n/g, ' ');
+        return text.toLowerCase().replace(/\n/g, ` ${TokenWords.separator} `);
     }
 }
 

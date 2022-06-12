@@ -75,10 +75,31 @@ class TokenHandler {
     if (!entity) {
       throw new Error("Не указана сущность для удаления");
     }
-    const params = tokens.map((t) => ({ name: t.text }));
+    const params = this.getDeleteParams(tokens);
     const command = new Command("remove", entity, params);
 
     return CommandExecuter.exec(command);
+  }
+
+  private getDeleteParams(tokens: Token[]): Array<{ name: string }> {
+    const result: Array<{ name: string }> = [];
+    let name = '';
+    tokens.forEach(t => {
+      if (t.type === TokenNames.separator) {
+        if (name !== '') {
+          result.push({ name });
+          name = '';
+        }
+        
+        return;
+      }
+      name += name 
+        ? ` ${t.text}`
+        : t.text;
+
+    })
+
+    return result;
   }
 
   private getParams(tokens: Token[]) {
@@ -104,13 +125,17 @@ class TokenHandler {
         }
         case TokenNames.param_cost: {
           param.cost = token.text;
-          params.push(param);
+          break;
+        }
+        case TokenNames.separator: {
+          if (param.name && param.cost) {
+            params.push(param);
+          }
           param = {
             name: "",
             cost: "",
             weight: "",
           };
-          break;
         }
         default: {
         }
