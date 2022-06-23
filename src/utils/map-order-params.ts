@@ -19,7 +19,11 @@ export const mapParams = async (params: Param[]): Promise<any> => {
         const { name, weight, cost } = param;
         const weightUnit = mapWeight(weight);
         const costUnit = mapCost(cost);
-        const costOfGoods = costGoods.filter((item) => item.name === name)[0].cost;
+        const good = costGoods.filter((item) => item.name === name)[0];
+        if (!good) {
+            throw(new Error(`Не верное имя ${name}`));
+        }
+        const costOfGoods = good.cost;
         const costOfGoodsTotal = (weightUnit / 100) * costOfGoods;
         const freeMony = costUnit - costOfGoodsTotal;
         console.log(`Free mony: ${freeMony}`);

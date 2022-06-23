@@ -44,10 +44,16 @@ class TokenHandler {
     if (!entity) {
       throw new Error("Не указана сущность для посчитай");
     }
-    const params = this.getCalcProfitParams(tokens);
+    const params = this.isOrderEntity(entity)
+      ? this.getParams(tokens)
+      : this.getCalcProfitParams(tokens);
     const command = new Command("calc", entity, params);
 
     return CommandExecuter.exec(command);
+  }
+
+  private isOrderEntity(token: Token): boolean {
+    return token.type === TokenNames.entity_order;
   }
 
   private read(tokens: Token[]) {
