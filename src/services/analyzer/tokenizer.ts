@@ -16,6 +16,7 @@ class Tokenizer {
     this._profitToken,
     this._costGoodsToken,
     this._dateRangeToken,
+    this._goodOrder,
 
     this._separatorToken,
 
@@ -100,6 +101,12 @@ class Tokenizer {
     }
   }
 
+  _goodOrder(text: string) {
+    if (text === TokenWords.entity_goodOrder) {
+      return new Token(TokenNames.entity_goodOrder, text);
+    }
+  }
+
   _costGoodsToken(text: string) {
     if (text == TokenWords.entity_costGoods) {
       return new Token(TokenNames.entity_costGoods, text);
@@ -111,7 +118,6 @@ class Tokenizer {
     if (hasDatate) {
       return new Token(TokenNames.param_date_range, text);
     }
-     
   }
 
   _textToken(text: string) {

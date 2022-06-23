@@ -13,6 +13,7 @@ export const TokenNames = {
   entity_order: "entity_order",
   entity_costGoods: "entity_costGoods",
   entity_profit: "entity_profit",
+  entity_goodOrder: "entity_goodOrder",
 
   separator: "separator",
 };
@@ -31,6 +32,7 @@ export const TokenWords = {
   entity_order: "заказ",
   entity_costGoods: "себестоимость",
   entity_free_mony: "прибыль",
+  entity_goodOrder: "товар",
 
   separator: "separator",
 };

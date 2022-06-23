@@ -3,6 +3,7 @@ import { TokenNames } from "../analyzer/tokens-name";
 import { Command } from "./command";
 import CommandExecuter from "./comand-executer";
 import { ICalcProfitParam } from "./calc-profit-command-executor";
+import { IReadGoodParam } from "./read-good-order-command-executer";
 
 class TokenHandler {
   private handlers: Record<string, (tokens: Token[]) => Promise<string>> = {
@@ -61,7 +62,11 @@ class TokenHandler {
     if (!entity) {
       throw new Error("Не указана сущность для покажи");
     }
-    const command = new Command("read", entity, null);
+    const param =
+      entity.type === TokenNames.entity_goodOrder
+        ? this.getReadCostGood(tokens)
+        : null;
+    const command = new Command("read", entity, param);
 
     return CommandExecuter.exec(command);
   }
@@ -88,23 +93,45 @@ class TokenHandler {
     return CommandExecuter.exec(command);
   }
 
+  private getReadCostGood(tokens: Token[]): IReadGoodParam {
+    const param: IReadGoodParam = {
+      name: "",
+      from: new Date(Date.now()),
+      to: new Date(Date.now()),
+    };
+
+    tokens.forEach((t) => {
+      if (t.type === TokenNames.param_date_range) {
+        const { from, to } = this.getRangeParam(t);
+        param.from = from;
+        param.to = to;
+      }
+      if (t.type === TokenNames.param_text) {
+        if (param.name === "") {
+          param.name = t.text;
+        } else {
+          param.name += ` ${t.text}`;
+        }
+      }
+    });
+
+    return param;
+  }
+
   private getDeleteParams(tokens: Token[]): Array<{ name: string }> {
     const result: Array<{ name: string }> = [];
-    let name = '';
-    tokens.forEach(t => {
+    let name = "";
+    tokens.forEach((t) => {
       if (t.type === TokenNames.separator) {
-        if (name !== '') {
+        if (name !== "") {
           result.push({ name });
-          name = '';
+          name = "";
         }
-        
+
         return;
       }
-      name += name 
-        ? ` ${t.text}`
-        : t.text;
-
-    })
+      name += name ? ` ${t.text}` : t.text;
+    });
 
     return result;
   }
@@ -117,16 +144,27 @@ class TokenHandler {
     };
 
     if (dateRange?.type === TokenNames.param_date_range) {
-      const [fd, fm, fy] = dateRange.text.slice(0,10).split(/[.,]/g);
-      if (fd && fm && fy) {
-        param.from = new Date(Number(fy), Number(fm), Number(fd));
-      }
-      const [td, tm, ty] = dateRange.text.slice(11,21).split(/[.,]/g);
-      if (td && tm && ty) {
-        param.to = new Date(Number(ty), Number(tm), Number(td)); 
-      }
+      const { from, to } = this.getRangeParam(dateRange);
+      param.from = from;
+      param.to = to;
     }
 
+    return param;
+  }
+
+  private getRangeParam(dateRange: Token): { from?: Date; to?: Date } {
+    const param: ICalcProfitParam = {
+      from: undefined,
+      to: undefined,
+    };
+    const [fd, fm, fy] = dateRange.text.slice(0, 10).split(/[.,]/g);
+    if (fd && fm && fy) {
+      param.from = new Date(Number(fy), Number(fm) - 1, Number(fd));
+    }
+    const [td, tm, ty] = dateRange.text.slice(11, 21).split(/[.,]/g);
+    if (td && tm && ty) {
+      param.to = new Date(Number(ty), Number(tm) - 1, Number(td));
+    }
     return param;
   }
 

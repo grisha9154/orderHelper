@@ -7,6 +7,7 @@ import { Command } from "./command";
 import { execReadCostGoods } from "./read-cost-goods-executer";
 import { execUpdateCostGoods } from "./update-cost-goods-executor";
 import { execRemoveCostOfGoods } from "./remove-cost-goods-command-executer";
+import { execReadGoodOrder } from "./read-good-order-command-executer";
 
 class CommandExecuter<TParam> {
   private executors: Record<string, (params: any) => Promise<string>> = {
@@ -17,6 +18,7 @@ class CommandExecuter<TParam> {
     [`update_${TokenNames.entity_costGoods}`]: execUpdateCostGoods,
     [`calc_${TokenNames.entity_profit}`]: execCalcProfitCommand,
     [`remove_${TokenNames.entity_costGoods}`]: execRemoveCostOfGoods,
+    [`read_${TokenNames.entity_goodOrder}`]: execReadGoodOrder,
   };
 
   public exec(command: Command<TParam[] | ICalcProfitParam | null>) {
