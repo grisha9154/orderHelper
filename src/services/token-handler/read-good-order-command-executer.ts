@@ -11,18 +11,17 @@ export interface IReadGoodParam {
 
 export const execReadGoodOrder = async (param: IReadGoodParam) => {
   const { firstDay, lastDay } = getDateFilter(param.from, param.to);
-  const goodOrders = 
-    await GoodOrder.findAll({
-      where: {
-        name: {
-          [Op.eq]: param.name,
-        },
-        createdAt: {
-            [Op.gt]: firstDay,
-            [Op.lt]: lastDay,
-        },
+  const goodOrders = await GoodOrder.findAll({
+    where: {
+      name: {
+        [Op.eq]: param.name,
       },
-    });
+      createdAt: {
+        [Op.gt]: firstDay,
+        [Op.lt]: lastDay,
+      },
+    },
+  });
   const freeMonyTotal = roundCost(
     goodOrders.reduce((agg, order) => {
       return agg + order.freeMony;

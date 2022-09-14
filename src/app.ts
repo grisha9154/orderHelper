@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
-import { tgRouter, uploadDataRouter } from "./api";
+import { tgRouter, uploadDataRouter, formTrackerRouter } from "./api";
 import { connection } from "./models/db-connection";
 
 const app = express();
@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 app.post("/tgbot", tgRouter);
 app.post("/upload", uploadDataRouter);
+app.post("/form-tracker", formTrackerRouter)
 
 connection.init().then(() => {
   app.listen(port, () => {
