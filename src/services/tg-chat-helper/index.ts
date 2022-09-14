@@ -5,10 +5,10 @@ export const getChats = () => {
 }
 
 export const setChat = async (chatId: string, name: string) => {
-    const chat = await TgChat.findOne({ where: {
+    const chats = await TgChat.findAll({ where: {
         chatId,
       }});
-    if (chat) {
+    if (chats.length) {
         return;
     }
 
