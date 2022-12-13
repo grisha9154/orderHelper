@@ -23,6 +23,7 @@ class DbConnector {
             dialect: 'mysql', 
           }
         : {
+            dialect: 'mysql',
             dialectOptions: {
               ssl: {
                 require: false,
