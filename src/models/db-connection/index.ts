@@ -20,8 +20,7 @@ class DbConnector {
     const options: Options | undefined =
       process.env.DEV === "true"
         ? {
-            dialectOptions: {
-            },
+            dialect: 'mysql', 
           }
         : {
             dialectOptions: {
