@@ -1,11 +1,12 @@
-import { Box } from "@mui/material";
-import { DataGrid } from "components";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "store";
+import { Box } from "@mui/material";
+
+import { DataGrid } from "components";
+import { useGetCategoriesQuery } from "store/category";
 
 export const CategoryListingPage: FC = () => {
-  const categories = useAppSelector(({ category }) => category.categories);
+  const { data: categories = [], isLoading } = useGetCategoriesQuery();
 
   return (
     <div>
@@ -23,6 +24,7 @@ export const CategoryListingPage: FC = () => {
       </Box>
       <div>
         <DataGrid
+          isLoading={isLoading}
           rows={categories}
           columns={{
             id: {

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { AppBar } from "@mui/material";
+import { AppBar, List, ListItem } from "@mui/material";
 
-interface Tab {
+export interface Tab {
   title: string;
   path: string;
 }
@@ -14,15 +14,19 @@ interface NavBarProps {
 export const NavBar: FC<NavBarProps> = ({ tabs }) => {
   return (
     <AppBar position="static">
-      <ul>
-        {tabs.map((x) => {
-          return (
-            <li>
-              <NavLink to={x.path}>{x.title}</NavLink>
-            </li>
-          );
-        })}
-      </ul>
+      <List sx={{ display: "flex" }}>
+        {tabs.map((x) => (
+          <NavLink key={x.path} to={x.path} style={{ textDecoration: "none" }}>
+            {({ isActive }) => (
+              <ListItem
+                sx={{ width: "auto", color: isActive ? "black" : "white" }}
+              >
+                {x.title}
+              </ListItem>
+            )}
+          </NavLink>
+        ))}
+      </List>
     </AppBar>
   );
 };

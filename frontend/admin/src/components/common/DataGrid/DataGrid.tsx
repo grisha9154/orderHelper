@@ -6,9 +6,11 @@ import {
 } from "@mui/x-data-grid";
 
 import { BaseRow, GridProps } from "./interfaces";
+import { GridLoader } from "./Loader";
 
 export const DataGrid = <TRow extends BaseRow>({
   rows,
+  isLoading,
   ...props
 }: GridProps<TRow>) => {
   const columns = useMemo<GridColDef[]>(
@@ -34,10 +36,14 @@ export const DataGrid = <TRow extends BaseRow>({
 
   return (
     <MuiDataGrid
+      loading={isLoading}
       sx={{ minHeight: "500px" }}
       autoHeight
       rows={rows}
       columns={columns}
+      components={{
+        LoadingOverlay: GridLoader,
+      }}
     />
   );
 };

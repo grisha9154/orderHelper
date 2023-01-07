@@ -1,5 +1,7 @@
 import { FC, WheelEvent } from "react";
-import { TextField, TextFieldProps } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
+
+import { Styled } from "./styled";
 
 export type NumberInputProps = Omit<TextFieldProps, "type">;
 
@@ -9,5 +11,5 @@ export const NumberInput: FC<NumberInputProps> = ({ onWheel, ...props }) => {
     onWheel?.(e);
   };
 
-  return <TextField type="number" onWheel={handleWheel} {...props} />;
+  return <Styled.TextInput type="number" onWheel={handleWheel} {...props} />;
 };

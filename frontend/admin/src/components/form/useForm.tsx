@@ -1,3 +1,4 @@
+import { isEqual } from "lodash";
 import React, {
   FC,
   FormHTMLAttributes,
@@ -20,6 +21,7 @@ import {
   TextControl,
   NumberControl,
   FileControl,
+  SingleAutocompleteControl,
 } from "./controls";
 
 const useControls = <TFieldValues extends FieldValues>() =>
@@ -37,6 +39,10 @@ const useControls = <TFieldValues extends FieldValues>() =>
        * @see {@link TextControl}
        */
       File: FileControl<TFieldValues>,
+      /**
+       * @see {@link TextControl}
+       */
+      SingleAutocomplete: SingleAutocompleteControl<TFieldValues>,
       /**
        * @see {@link SubmitButton}
        */

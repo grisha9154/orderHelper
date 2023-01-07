@@ -1,5 +1,9 @@
+import { ThemeProvider } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "store";
+import { theme } from "styles/theme";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
@@ -8,7 +12,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

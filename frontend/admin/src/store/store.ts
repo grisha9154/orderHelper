@@ -1,10 +1,13 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import { categoryReducer } from "./category";
+import { categoryApi } from "./category";
+import { productApi } from "./products";
+import { setupListeners } from "@reduxjs/toolkit/dist/query/react";
 
 const reducer = combineReducers({
-  category: categoryReducer,
+  [productApi.reducerPath]: productApi.reducer,
+  [categoryApi.reducerPath]: categoryApi.reducer,
 });
 
 export const store = configureStore({
@@ -12,8 +15,12 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    })
+      .concat(productApi.middleware)
+      .concat(categoryApi.middleware),
 });
+
+setupListeners(store.dispatch);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

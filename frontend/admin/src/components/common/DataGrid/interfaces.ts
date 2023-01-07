@@ -10,4 +10,5 @@ interface ColumnConfig<TRow extends BaseRow> {
 export interface GridProps<TRow extends BaseRow> {
   rows: TRow[];
   columns: Partial<Record<keyof TRow, ColumnConfig<TRow>>>;
+  isLoading?: boolean;
 }

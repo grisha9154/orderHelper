@@ -27,7 +27,6 @@ export const FileControl = connectField<string | undefined, FileControlProps>(
     ...props
   }) => {
     const { field } = fieldProps;
-    const { resetField } = useFormContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [fileData, setFileData] = useState<FileData>({});
     const inputFileRef = useRef<HTMLInputElement | null>(null);

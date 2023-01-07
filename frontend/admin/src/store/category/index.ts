@@ -1,1 +1,2 @@
-export * from "./slice";
+export type { Category } from "./interfaces";
+export * from "./api";
