@@ -1,2 +1,2 @@
-export * from "./TextInput";
-export * from "./NumberInput";
+export * from "./text-input";
+export * from "./number-input";

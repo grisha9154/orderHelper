@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import { connectField } from "../../connectField";
+import { connectField } from "../../connect-field";
 import { FileUploader, FileUploaderProps } from "../../../components";
 
 export interface FileData {

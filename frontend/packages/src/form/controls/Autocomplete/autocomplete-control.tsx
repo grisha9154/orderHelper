@@ -5,7 +5,7 @@ import {
   SingleAutocompleteProps,
   Autocomplete,
 } from "../../../components";
-import { connectField } from "../../connectField";
+import { connectField } from "../../connect-field";
 
 export interface SingleAutocompleteControlProps
   extends Omit<

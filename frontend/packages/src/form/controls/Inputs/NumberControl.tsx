@@ -1,6 +1,6 @@
 import React from "react";
 
-import { connectField } from "../../connectField";
+import { connectField } from "../../connect-field";
 import { NumberInput, NumberInputProps } from "../../../components";
 
 export type NumberControlProps = Omit<

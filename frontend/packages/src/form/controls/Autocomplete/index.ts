@@ -1,1 +1,1 @@
-export * from "./AutocompleteControl";
+export * from "./autocomplete-control";

@@ -1,4 +1,4 @@
 export * from "./Inputs";
-export * from "./SubmitButton";
-export * from "./File";
-export * from "./Autocomplete";
+export * from "./submit-button";
+export * from "./file";
+export * from "./autocomplete";

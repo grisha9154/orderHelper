@@ -1,1 +1,1 @@
-export * from "./FileControl";
+export * from "./file-control";

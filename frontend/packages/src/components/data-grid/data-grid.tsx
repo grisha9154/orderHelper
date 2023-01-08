@@ -6,7 +6,7 @@ import {
 } from "@mui/x-data-grid";
 
 import { BaseRow, GridProps } from "./interfaces";
-import { GridLoader } from "./Loader";
+import { GridLoader } from "./loader";
 
 export const DataGrid = <TRow extends BaseRow>({
   rows,

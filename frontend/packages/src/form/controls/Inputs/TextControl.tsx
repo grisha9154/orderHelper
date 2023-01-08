@@ -1,7 +1,7 @@
 import React from "react";
 
 import { TextInput, TextInputProps } from "../../../components";
-import { connectField } from "../../connectField";
+import { connectField } from "../../connect-field";
 
 export type TextControlProps = Omit<
   TextInputProps,
