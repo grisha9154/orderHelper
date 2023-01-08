@@ -12,8 +12,8 @@ import { NavBar } from "./components";
 import { Path } from "global-constants";
 
 import "styles/index.css";
-import { ProductCreatePage } from "pages/Product/Create";
-import { ProductEditPage } from "pages/Product/Edit";
+import { ProductCreatePage } from "pages/product/create";
+import { ProductEditPage } from "pages/product/edit";
 
 const tabs = [
   {

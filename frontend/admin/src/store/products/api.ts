@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { sleep } from "utils";
+import { sleep } from "packages";
 
 import { Product } from "./interfaces";
 
