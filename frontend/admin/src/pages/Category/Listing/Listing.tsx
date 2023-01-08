@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
+import { DataGrid } from "packages";
 
-import { DataGrid } from "components";
 import { useGetCategoriesQuery } from "store/category";
 
 export const CategoryListingPage: FC = () => {

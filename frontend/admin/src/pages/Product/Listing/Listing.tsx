@@ -1,8 +1,9 @@
 import { FC, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Box, LinearProgress } from "@mui/material";
+import { DataGrid } from "packages";
 
-import { DataGrid, NavBar, Tab } from "components";
+import { NavBar, Tab } from "components";
 import { Path } from "global-constants";
 import { useGetCategoriesQuery } from "store/category";
 import { useGetProductsByCategoryQuery } from "store/products";

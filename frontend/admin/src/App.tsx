@@ -1,15 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
+import { PageContainer } from "packages";
 
-import { store } from "./store";
 import {
   CategoryListingPage,
   CategoryCreatePage,
   CategoryEditPage,
   ProductListingPage,
 } from "./pages";
-import { NavBar, PageContainer } from "./components";
+import { NavBar } from "./components";
 import { Path } from "global-constants";
 
 import "styles/index.css";
