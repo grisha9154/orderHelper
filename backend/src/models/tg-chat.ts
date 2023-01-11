@@ -1,23 +1,17 @@
 import { DataTypes, Model } from "sequelize";
 import { connection } from "./db-connection";
 
-export class User extends Model {
-    declare id: string;
+export class TgChat extends Model {
     declare name: string;
-    declare password: string;
-    declare login: string;
+    declare chatId: string;
 }
 
-User.init({
+TgChat.init({
     name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    login: {
+    chatId: {
         type: DataTypes.STRING,
         allowNull: false,
     }
