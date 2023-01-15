@@ -1,5 +1,5 @@
 
-import { CostGoods } from "../../data-base/models/cost-goods";
+import { CostGoods } from "../../models/cost-goods";
 import { roundCost } from "../../utils/round-cost";
 
 export const execReadCostGoods = async () => {

@@ -1,4 +1,4 @@
-import { CostGoods } from "../../data-base/models/cost-goods";
+import { CostGoods } from "../../models/cost-goods";
 import { mapCost } from "../../utils/map-const";
 
 export interface Param {
