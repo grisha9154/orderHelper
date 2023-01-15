@@ -24,7 +24,7 @@ Product.init({
         allowNull: false,
     },
     categoryId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,  
     },
 }, { sequelize: connection.connection });

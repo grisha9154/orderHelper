@@ -1,5 +1,6 @@
 import { RequestHandler, Express } from "express";
 import { CRUD } from "../services/category-helper";
+import { canAdmin } from "../services/user-permission";
 
 const handleGetCategories: RequestHandler = async (_, res) => {
   const categories = await CRUD.readAll();
@@ -27,8 +28,8 @@ const handleUpdateCategory: RequestHandler = async (req, res) => {
 }
 
 export const categoryRouter: (app: Express) => void = (app) => {
-  app.get("/api/categories", handleGetCategories);
-  app.get("/api/categories/:descriptionId", handleGetCategoryById);
-  app.post("/api/categories", handleCreateCategory);
-  app.put("/api/categories", handleUpdateCategory);
+  app.get("/api/categories", canAdmin, handleGetCategories);
+  app.get("/api/categories/:descriptionId", canAdmin, handleGetCategoryById);
+  app.post("/api/categories", canAdmin, handleCreateCategory);
+  app.put("/api/categories", canAdmin, handleUpdateCategory);
 };
