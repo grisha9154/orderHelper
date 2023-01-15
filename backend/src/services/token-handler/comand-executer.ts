@@ -2,11 +2,12 @@ import { TokenNames } from "../analyzer/tokens-name";
 import { execAddCostGoodsCommand } from "./add-cost-goods-command-executer";
 import { execOrderAddCommand } from "./add-order-command-executer";
 import { execCalcOrderCommand } from "./calc-order-command-executer";
-import { execCalcProfitCommand } from "./calc-profit-command-executor";
+import { execCalcProfitCommand, ICalcProfitParam } from "./calc-profit-command-executor";
 import { Command } from "./command";
 import { execReadCostGoods } from "./read-cost-goods-executer";
 import { execUpdateCostGoods } from "./update-cost-goods-executor";
 import { execRemoveCostOfGoods } from "./remove-cost-goods-command-executer";
+import { execReadGoodOrder } from "./read-good-order-command-executer";
 
 class CommandExecuter<TParam> {
   private executors: Record<string, (params: any) => Promise<string>> = {
@@ -17,9 +18,10 @@ class CommandExecuter<TParam> {
     [`update_${TokenNames.entity_costGoods}`]: execUpdateCostGoods,
     [`calc_${TokenNames.entity_profit}`]: execCalcProfitCommand,
     [`remove_${TokenNames.entity_costGoods}`]: execRemoveCostOfGoods,
+    [`read_${TokenNames.entity_goodOrder}`]: execReadGoodOrder,
   };
 
-  public exec(command: Command<TParam[] | null>) {
+  public exec(command: Command<TParam[] | ICalcProfitParam | null>) {
     const executer = this.getExecuter(command.name, command.entity.type);
     return executer(command.params);
   }

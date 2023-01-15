@@ -1,8 +1,7 @@
 import { CostGoods } from "../../data-base/models/cost-goods";
 
-export interface Param {
+interface Param {
   name: string;
-  cost: string;
 }
 
 export const execRemoveCostOfGoods = async (

@@ -1,6 +1,6 @@
 import { costUnitRegex, weightUnitRegex } from "../../utils";
 import { Token } from "./token";
-import { TokenNames } from "./tokens-name";
+import { TokenNames, TokenWords } from "./tokens-name";
 
 class Tokenizer {
   private tokenizers = [
@@ -15,12 +15,16 @@ class Tokenizer {
     this._orderToken,
     this._profitToken,
     this._costGoodsToken,
+    this._dateRangeToken,
+    this._goodOrder,
+
+    this._separatorToken,
 
     this._textToken,
   ];
 
   public createToken(words: string[]): Token[] {
-    return words.map((word) => {
+    const tokens = words.map((word) => {
       for (const func of this.tokenizers) {
         const token = func(word);
         if (token) {
@@ -32,23 +36,44 @@ class Tokenizer {
 
       throw new Error(errorMessage);
     });
+    this.extendsWithEndSeparator(tokens);
+    return tokens;
+  }
+
+  private extendsWithEndSeparator(tokens: Token[]): void {
+    if (tokens[tokens.length - 1].type === TokenNames.separator){
+      return;
+    }
+    tokens.push(new Token(TokenNames.separator, TokenWords.separator));
   }
 
   _commandAddToken(text: string) {
-    if (text == "добавь") {
+    if (text === TokenWords.command_add) {
       return new Token(TokenNames.command_add, text);
     }
   }
 
   _commandRreadToken(text: string) {
-    if (text == "покажи") {
+    if (text == TokenWords.command_read) {
       return new Token(TokenNames.command_read, text);
     }
   }
 
   _commandUpdateToken(text: string) {
-    if (text == "обнови") {
+    if (text == TokenWords.command_update) {
       return new Token(TokenNames.command_update, text);
+    }
+  }
+
+  _commandCalcCostToken(text: string) {
+    if (text == TokenWords.command_calc) {
+      return new Token(TokenNames.command_calc, text);
+    }
+  }
+
+  _commandRemoveToken(text: string) {
+    if (text === TokenWords.command_delete) {
+      return new Token(TokenNames.command_remove, text);
     }
   }
 
@@ -64,40 +89,48 @@ class Tokenizer {
     }
   }
 
+  _orderToken(text: string) {
+    if (text == TokenWords.entity_order) {
+      return new Token(TokenNames.entity_order, text);
+    }
+  }
+
+  _profitToken(text: string) {
+    if (text === TokenWords.entity_free_mony) {
+      return new Token(TokenNames.entity_profit, text);
+    }
+  }
+
+  _goodOrder(text: string) {
+    if (text === TokenWords.entity_goodOrder) {
+      return new Token(TokenNames.entity_goodOrder, text);
+    }
+  }
+
+  _costGoodsToken(text: string) {
+    if (text == TokenWords.entity_costGoods) {
+      return new Token(TokenNames.entity_costGoods, text);
+    }
+  }
+
+  _dateRangeToken(text: string) {
+    const hasDatate = new RegExp('\\d\\d(.|,)\\d\\d(.|,)\\d\\d\\d\\d').test(text);
+    if (hasDatate) {
+      return new Token(TokenNames.param_date_range, text);
+    }
+  }
+
   _textToken(text: string) {
     if (/[а-яА-Я]*/.test(text)) {
       return new Token(TokenNames.param_text, text);
     }
   }
 
-  _orderToken(text: string) {
-    if (text == "заказ") {
-      return new Token(TokenNames.entity_order, text);
+  _separatorToken(text: string) {
+    if (text === TokenWords.separator){
+      return new Token(TokenNames.separator, text);
     }
-  }
 
-  _profitToken(text: string) {
-    if (text === "прибыль") {
-      return new Token(TokenNames.entity_profit, text);
-    }
-  }
-
-  _costGoodsToken(text: string) {
-    if (text == "себестоимость") {
-      return new Token(TokenNames.entity_costGoods, text);
-    }
-  }
-
-  _commandCalcCostToken(text: string) {
-    if (text == "посчитай") {
-      return new Token(TokenNames.command_calc, text);
-    }
-  }
-
-  _commandRemoveToken(text: string) {
-    if (text === "удали") {
-      return new Token(TokenNames.command_remove, text);
-    }
   }
 }
 
