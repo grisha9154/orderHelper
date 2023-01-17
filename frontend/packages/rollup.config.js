@@ -1,33 +1,37 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import terser from "@rollup/plugin-terser";
 import dts from "rollup-plugin-dts";
+
+import packageJson from "./package.json" assert { type: "json" };
 
 export default [
   {
     input: "src/index.ts",
     output: [
       {
-        file: "dist/cjs/index.js",
+        file: packageJson.main,
         format: "cjs",
         sourcemap: true,
       },
       {
-        file: "dist/esm/index.js",
+        file: packageJson.module,
         format: "esm",
         sourcemap: true,
       },
     ],
     plugins: [
-      peerDepsExternal(),
       resolve(),
       commonjs(),
+      // babel({
+      //   exclude: "node_modules/**",
+      //   babelHelpers: "bundled",
+      // }),
       typescript({ tsconfig: "./tsconfig.json" }),
-      terser(),
     ],
     external: [
+      "@emotion/server",
+      "@emotion/cache",
       "@emotion/react",
       "@emotion/styled",
       "@mui/material",
@@ -35,6 +39,8 @@ export default [
       "lodash",
       "react",
       "react-hook-form",
+      "react-dom",
+      "next",
     ],
   },
   {

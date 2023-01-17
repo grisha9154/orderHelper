@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "remove-files-webpack-plugin": "^1.5.0",
-    "react-app-rewired": "^2.2.1"
+    "react-app-rewired": "^2.2.1",
+    "remove-files-webpack-plugin": "^1.5.0"
   }
 }
