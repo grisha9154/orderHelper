@@ -1,4 +1,4 @@
-import { TgChat } from "../../models/user";
+import { TgChat } from "../../models/tg-chat";
 
 export const getChats = () => {
     return TgChat.findAll();
