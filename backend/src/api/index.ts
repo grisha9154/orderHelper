@@ -2,3 +2,7 @@ export { tgRouter } from './tg-router'
 export { uploadDataRouter } from './upload-data';
 export { formTrackerRouter } from './form-tracker-router';
 export * from './auth-router';
+export * from './category-router';
+export * from './product-route';
+export * from './permission-router';
+
