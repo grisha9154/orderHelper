@@ -1,10 +1,9 @@
+import { useAppForm } from "components/form";
 import { FC } from "react";
-import { useAppForm } from "packages";
 
 export interface FormValues {
-  name: string;
+  title: string;
   description: string;
-  file?: string;
 }
 
 interface CategoryFormProps {
@@ -24,7 +23,7 @@ export const CategoryForm: FC<CategoryFormProps> = ({
   return (
     <Form>
       <Controls.Text
-        name="name"
+        name="title"
         title="Наименование"
         rules={{ required: "Поле обязательно" }}
       />
@@ -33,7 +32,6 @@ export const CategoryForm: FC<CategoryFormProps> = ({
         title="Описание"
         rules={{ required: "Поле обязательно" }}
       />
-      <Controls.File name="file" rules={{ required: "Поле обязательно" }} />
       <Controls.SubmitButton>Сохранить</Controls.SubmitButton>
     </Form>
   );

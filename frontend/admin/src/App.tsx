@@ -1,39 +1,49 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PageContainer } from "packages";
+import React, { FC, useLayoutEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import {
   CategoryListingPage,
   CategoryCreatePage,
   CategoryEditPage,
   ProductListingPage,
+  SignInPage,
+  SignUpPage,
 } from "./pages";
-import { NavBar } from "./components";
+import { Header, NavBar, PageContainer } from "./components";
 import { Path } from "global-constants";
 
 import "styles/index.css";
 import { ProductCreatePage } from "pages/product/create";
 import { ProductEditPage } from "pages/product/edit";
+import { useAppSelector } from "store";
 
-const tabs = [
-  {
-    title: "Категории",
-    path: Path.CATEGORY,
-  },
-  {
-    title: "Товары",
-    path: Path.PRODUCT,
-  },
-];
+const RedirectToSignIn: FC = () => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-const App = () => {
+  useLayoutEffect(() => {
+    navigate(Path.SIGN_IN);
+  }, [navigate, pathname]);
+
+  return null;
+};
+
+const App: FC = () => {
+  const isAuth = useAppSelector(({ user }) => user.isAuth);
+
   return (
-    <BrowserRouter>
-      <NavBar tabs={tabs} />
-
+    <>
+      <Header />
       <PageContainer>
+        {!isAuth && (
+          <Routes>
+            <Route path={Path.SIGN_IN} element={<SignInPage />} />
+            <Route path={Path.SIGN_UP} element={<SignUpPage />} />
+            <Route path="*" element={<RedirectToSignIn />} />
+          </Routes>
+        )}
         <Routes>
-          <Route path={`${Path.CATEGORY}`}>
+          <Route path={Path.CATEGORY}>
             <Route index element={<CategoryListingPage />} />
             <Route path="create" element={<CategoryCreatePage />} />
             <Route path="edit/:id" element={<CategoryEditPage />} />
@@ -45,7 +55,7 @@ const App = () => {
           </Route>
         </Routes>
       </PageContainer>
-    </BrowserRouter>
+    </>
   );
 };
 

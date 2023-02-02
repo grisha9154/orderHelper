@@ -1,13 +1,23 @@
 import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
-import { tgRouter, uploadDataRouter, formTrackerRouter, authRouter, categoryRouter, productRouter, permissionRouter } from "./api";
+import {
+  tgRouter,
+  uploadDataRouter,
+  formTrackerRouter,
+  authRouter,
+  categoryRouter,
+  productRouter,
+  permissionRouter,
+} from "./api";
 import { connection } from "./models/db-connection";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 permissionRouter(app);
 app.post("/tgbot", tgRouter);
@@ -17,7 +27,7 @@ productRouter(app);
 
 app.post("/upload", uploadDataRouter);
 app.post("/form-tracker", formTrackerRouter);
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 connection.init().then(() => {
   app.listen(port, () => {

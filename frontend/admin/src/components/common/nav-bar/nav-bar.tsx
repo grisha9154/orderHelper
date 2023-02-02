@@ -9,14 +9,20 @@ export interface Tab {
 
 interface NavBarProps {
   tabs: Tab[];
+  strict?: boolean;
 }
 
-export const NavBar: FC<NavBarProps> = ({ tabs }) => {
+export const NavBar: FC<NavBarProps> = ({ tabs, strict }) => {
   return (
     <AppBar position="static">
       <List sx={{ display: "flex" }}>
         {tabs.map((x) => (
-          <NavLink key={x.path} to={x.path} style={{ textDecoration: "none" }}>
+          <NavLink
+            key={x.path}
+            to={x.path}
+            style={{ textDecoration: "none" }}
+            end={strict}
+          >
             {({ isActive }) => (
               <ListItem
                 sx={{ width: "auto", color: isActive ? "black" : "white" }}

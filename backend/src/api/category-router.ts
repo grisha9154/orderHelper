@@ -14,18 +14,18 @@ const handleGetCategoryById: RequestHandler = async (req, res) => {
 };
 
 const handleCreateCategory: RequestHandler = async (req, res) => {
-    const category = req.body;
-    const result = await CRUD.create(category);
+  const category = req.body;
+  const result = await CRUD.create(category);
 
-    res.json(result);
+  res.json(result);
 };
 
 const handleUpdateCategory: RequestHandler = async (req, res) => {
-    const category = req.body;
-    const result = await CRUD.update(category);
+  const category = req.body;
+  const result = await CRUD.update(category);
 
-    res.json(result);
-}
+  res.json(result);
+};
 
 export const categoryRouter: (app: Express) => void = (app) => {
   app.get("/api/categories", canAdmin, handleGetCategories);

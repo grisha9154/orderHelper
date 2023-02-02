@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
-import { DataGrid } from "packages";
 
 import { useGetCategoriesQuery } from "store/category";
+import { DataGrid } from "components";
 
 export const CategoryListingPage: FC = () => {
   const { data: categories = [], isLoading } = useGetCategoriesQuery();
@@ -18,9 +18,7 @@ export const CategoryListingPage: FC = () => {
         }}
       >
         <h1>Категории</h1>
-        <Link to="create">
-          <a>Создать</a>
-        </Link>
+        <Link to="create">Создать</Link>
       </Box>
       <div>
         <DataGrid
@@ -29,11 +27,7 @@ export const CategoryListingPage: FC = () => {
           columns={{
             id: {
               title: "ID",
-              cell: ({ id }) => (
-                <Link to={`edit/${id}`}>
-                  <a>{id}</a>
-                </Link>
-              ),
+              cell: ({ id }) => <Link to={`edit/${id}`}>{id}</Link>,
             },
             title: { title: "Наименование", cell: ({ title }) => title },
             description: {

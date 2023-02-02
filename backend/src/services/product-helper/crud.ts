@@ -1,10 +1,11 @@
 import { Product } from "../../models/products";
-import { Category } from '../../models/category';
+import { Category } from "../../models/category";
 import {
   ReadProductResult,
   CreateProductPayload,
   UpdateProductPayload,
 } from "./interfaces";
+import { Attributes, FindOptions, WhereOptions } from "sequelize";
 
 const readOne = async (id: number): Promise<ReadProductResult | null> => {
   const product = await Product.findOne({
@@ -26,8 +27,16 @@ const readOne = async (id: number): Promise<ReadProductResult | null> => {
   };
 };
 
-const readAll = async (): Promise<ReadProductResult[]> => {
-  const products = await Product.findAll();
+const readAll = async (categoryId?: number): Promise<ReadProductResult[]> => {
+  const whereConditions: WhereOptions<Product> = {};
+
+  if (categoryId !== undefined) {
+    whereConditions.categoryId = categoryId;
+  }
+
+  const products = await Product.findAll({
+    where: whereConditions,
+  });
 
   return products.map((p) => {
     return {
@@ -43,7 +52,9 @@ const readAll = async (): Promise<ReadProductResult[]> => {
 const create = async (
   payload: CreateProductPayload
 ): Promise<ReadProductResult | null> => {
-  const category = await Category.findOne({where: { id: payload.categoryId }});
+  const category = await Category.findOne({
+    where: { id: payload.categoryId },
+  });
   if (category === null) {
     return null;
   }

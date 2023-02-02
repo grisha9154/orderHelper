@@ -1,48 +1,46 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
-import { Category } from "./interfaces";
 
-const sleep = (ms: number = 1000) => new Promise((r) => setTimeout(r, ms));
+import { getBaseQuery } from "store/baseQuery";
+
+import {
+  Category,
+  CreateCategoryPayload,
+  UpdateCategoryPayload,
+} from "./interfaces";
 
 export const categoryApi = createApi({
   reducerPath: "category",
   refetchOnMountOrArgChange: true,
+  refetchOnFocus: true,
   tagTypes: ["Categories"],
-  baseQuery: async () => {
-    console.log("HELLO");
-    await sleep(3000);
-    return await {
-      data: [
-        {
-          id: "1",
-          description: "descr",
-          title: "title1",
-        },
-        {
-          id: "2",
-          description: "descr",
-          title: "title1",
-        },
-      ] as Category[],
-    };
-  },
+  baseQuery: getBaseQuery({
+    baseUrl: "categories",
+  }),
   endpoints: (builder) => ({
     getCategories: builder.query<Category[], void>({
-      query: () => ``,
+      query: () => "",
       providesTags: [{ type: "Categories" }],
     }),
     getCategory: builder.query<Category, string>({
-      query: (productId) => `${productId}`,
+      query: (id) => `${id}`,
       providesTags: (_result, _error, categoryId) => [
         { type: "Categories", categoryId },
       ],
     }),
-    addCategory: builder.mutation<Category, Category>({
-      query: (categoryId) => `${categoryId}`,
+    createCategory: builder.mutation<Category, CreateCategoryPayload>({
+      query: (model) => ({
+        url: "",
+        method: "POST",
+        body: model,
+      }),
       invalidatesTags: [{ type: "Categories" }],
     }),
-    updateCategory: builder.mutation<Category, Category>({
-      query: (categoryId) => `${categoryId}`,
+    updateCategory: builder.mutation<Category, UpdateCategoryPayload>({
+      query: (model) => ({
+        url: "",
+        method: "PUT",
+        body: model,
+      }),
       invalidatesTags: (_result, _error, params) => [
         { type: "Categories", categoryId: params.id },
       ],
@@ -50,4 +48,9 @@ export const categoryApi = createApi({
   }),
 });
 
-export const { useGetCategoriesQuery } = categoryApi;
+export const {
+  useGetCategoriesQuery,
+  useGetCategoryQuery,
+  useCreateCategoryMutation,
+  useUpdateCategoryMutation,
+} = categoryApi;

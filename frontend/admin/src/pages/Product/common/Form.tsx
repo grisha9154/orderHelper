@@ -1,32 +1,35 @@
+import { BaseOption } from "components";
+import { useAppForm } from "components/form";
 import { FC } from "react";
-import { useAppForm, BaseOption } from "packages";
 
 export interface FormValues {
-  name: string;
+  title: string;
   description: string;
-  category?: BaseOption;
-  file?: string;
-  price?: number;
+  category: BaseOption;
+  price: number;
 }
 
 interface ProductFormProps {
-  defaultValues?: FormValues;
+  defaultValues?: Partial<FormValues>;
   handleSubmit: (value: FormValues) => Promise<void>;
+  categoryOptions: BaseOption[];
 }
 
 export const ProductForm: FC<ProductFormProps> = ({
   handleSubmit,
   defaultValues,
+  categoryOptions,
 }) => {
   const { Form, Controls } = useAppForm<FormValues>({
     handleSubmit,
     defaultValues,
+    enableReinitializeDefaultValues: true,
   });
 
   return (
     <Form>
       <Controls.Text
-        name="name"
+        name="title"
         title="Наименование"
         rules={{ required: "Поле обязательно" }}
       />
@@ -39,17 +42,13 @@ export const ProductForm: FC<ProductFormProps> = ({
         name="category"
         title="Категория"
         rules={{ required: "Поле обязательно" }}
-        options={[
-          { id: "1", title: "Category 11" },
-          { id: "2", title: "Category 22" },
-        ]}
+        options={categoryOptions}
       />
       <Controls.Number
         name="price"
         title="Цена"
         rules={{ required: "Поле обязательно" }}
       />
-      <Controls.File name="file" rules={{ required: "Поле обязательно" }} />
       <Controls.SubmitButton>Сохранить</Controls.SubmitButton>
     </Form>
   );

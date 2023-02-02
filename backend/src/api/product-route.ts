@@ -2,8 +2,12 @@ import { RequestHandler, Express } from "express";
 import { CRUD } from "../services/product-helper";
 import { canAdmin } from "../services/user-permission";
 
-const handleGetProducts: RequestHandler = async (_, res) => {
-  const products = await CRUD.readAll();
+const handleGetProducts: RequestHandler = async (req, res) => {
+  const categoryId: number | undefined = !!req.query.categoryId
+    ? Number(req.query.categoryId)
+    : undefined;
+
+  const products = await CRUD.readAll(categoryId);
   res.json(products);
 };
 
@@ -14,18 +18,18 @@ const handleGetProductById: RequestHandler = async (req, res) => {
 };
 
 const handleCreateProduct: RequestHandler = async (req, res) => {
-    const product = req.body;
-    const result = await CRUD.create(product);
+  const product = req.body;
+  const result = await CRUD.create(product);
 
-    res.json(result);
+  res.json(result);
 };
 
 const handleUpdateProduct: RequestHandler = async (req, res) => {
-    const category = req.body;
-    const result = await CRUD.update(category);
+  const category = req.body;
+  const result = await CRUD.update(category);
 
-    res.json(result);
-}
+  res.json(result);
+};
 
 export const productRouter: (app: Express) => void = (app) => {
   app.get("/api/products", canAdmin, handleGetProducts);

@@ -1,25 +1,27 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import { useParams } from "react-router-dom";
+import { useUpdateCategoryMutation, useGetCategoryQuery } from "store/category";
+
 import { CategoryForm, FormValues } from "../common";
 
 export const CategoryEditPage: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [tt, setTT] = useState(0);
-
-  const data = useMemo<FormValues>(() => {
-    return { name: "name1", description: "test1" };
-  }, [id]);
+  const { data: category } = useGetCategoryQuery(id || "");
+  const [updateCategory] = useUpdateCategoryMutation();
 
   return (
     <div>
-      <h1>
-        Редактирование категории {id} {tt}
-      </h1>
-      <button onClick={() => setTT((x) => x + 1)}>+++</button>
+      <h1>Редактирование категории {id}</h1>
       <CategoryForm
-        defaultValues={data}
+        defaultValues={category}
         handleSubmit={async (data) => {
-          console.log(data);
+          if (category) {
+            updateCategory({
+              id: category.id,
+              title: data.title,
+              description: data.description,
+            });
+          }
         }}
       />
     </div>
