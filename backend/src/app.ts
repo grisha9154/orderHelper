@@ -9,12 +9,14 @@ import {
   categoryRouter,
   productRouter,
   permissionRouter,
+  expenseCategoryRouter,
+  expenseRouter,
 } from "./api";
 import { connection } from "./models/db-connection";
 import cors from "cors";
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -24,6 +26,8 @@ app.post("/tgbot", tgRouter);
 authRouter(app);
 categoryRouter(app);
 productRouter(app);
+expenseCategoryRouter(app);
+expenseRouter(app);
 
 app.post("/upload", uploadDataRouter);
 app.post("/form-tracker", formTrackerRouter);

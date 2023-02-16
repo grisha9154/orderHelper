@@ -7,8 +7,12 @@ interface ColumnConfig<TRow extends BaseRow> {
   cell: (row: TRow) => string | undefined | JSX.Element;
 }
 
+export type Columns<TRow extends BaseRow> = Partial<
+  Record<keyof TRow, ColumnConfig<TRow>>
+>;
+
 export interface GridProps<TRow extends BaseRow> {
   rows: TRow[];
-  columns: Partial<Record<keyof TRow, ColumnConfig<TRow>>>;
+  columns: Columns<TRow>;
   isLoading?: boolean;
 }

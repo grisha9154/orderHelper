@@ -3,4 +3,5 @@ export enum Path {
   PRODUCT = "product",
   SIGN_IN = "sign-in",
   SIGN_UP = "sign-up",
+  EXPENSE_CATEGORY = "expense-category",
 }

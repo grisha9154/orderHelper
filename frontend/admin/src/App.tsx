@@ -9,13 +9,19 @@ import {
   SignInPage,
   SignUpPage,
 } from "./pages";
-import { Header, NavBar, PageContainer } from "./components";
+import { Header, PageContainer } from "./components";
 import { Path } from "global-constants";
 
 import "styles/index.css";
 import { ProductCreatePage } from "pages/product/create";
 import { ProductEditPage } from "pages/product/edit";
 import { useAppSelector } from "store";
+import {
+  ExpenseCategoryEditPage,
+  ExpenseCategoryCreatePage,
+  ExpenseCategoryListingPage,
+  ExpenseCategoryDetailsPage,
+} from "pages/expense";
 
 const RedirectToSignIn: FC = () => {
   const navigate = useNavigate();
@@ -52,6 +58,15 @@ const App: FC = () => {
             <Route index element={<ProductListingPage />} />
             <Route path="create" element={<ProductCreatePage />} />
             <Route path="edit/:id" element={<ProductEditPage />} />
+          </Route>
+          <Route path={Path.EXPENSE_CATEGORY}>
+            <Route index element={<ExpenseCategoryListingPage />} />
+            <Route path="create" element={<ExpenseCategoryCreatePage />} />
+            <Route path="edit/:id" element={<ExpenseCategoryEditPage />} />
+            <Route
+              path="details/:id"
+              element={<ExpenseCategoryDetailsPage />}
+            />
           </Route>
         </Routes>
       </PageContainer>

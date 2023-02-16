@@ -22,19 +22,17 @@ import {
   NumberControl,
   FileControl,
   SingleAutocompleteControl,
+  DatePickerControl,
 } from "./controls";
 
 const useControls = <TFieldValues extends FieldValues>() =>
   useMemo(
     () => ({
       Text: TextControl<TFieldValues>,
-
       Number: NumberControl<TFieldValues>,
-
       File: FileControl<TFieldValues>,
-
       SingleAutocomplete: SingleAutocompleteControl<TFieldValues>,
-
+      Date: DatePickerControl<TFieldValues>,
       SubmitButton,
     }),
     []

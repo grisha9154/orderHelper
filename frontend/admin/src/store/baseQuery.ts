@@ -1,9 +1,5 @@
-import { BaseQueryFn, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
-import {
-  FetchArgs,
-  FetchBaseQueryArgs,
-  FetchBaseQueryError,
-} from "@reduxjs/toolkit/dist/query/fetchBaseQuery";
+import { fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { FetchBaseQueryArgs } from "@reduxjs/toolkit/dist/query/fetchBaseQuery";
 import { RootState } from "./store";
 
 export function getBaseQuery(params?: FetchBaseQueryArgs) {

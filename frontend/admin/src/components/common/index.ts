@@ -5,3 +5,4 @@ export * from "./inputs";
 export * from "./file-uploader";
 export * from "./autocomplete";
 export * from "./header";
+export * from "./date-picker";

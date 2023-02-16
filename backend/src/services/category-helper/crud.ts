@@ -1,69 +1,77 @@
-import { Category } from '../../models/category';
-import { CreateCategoryPayload, ReadCategoryResult, UpdateCategoryPayload } from './interfaces';
+import { Category } from "../../models/category";
+import {
+  CreateCategoryPayload,
+  ReadCategoryResult,
+  UpdateCategoryPayload,
+} from "./interfaces";
 
 const readOne = async (id: number): Promise<ReadCategoryResult | null> => {
-    const category = await Category.findOne({
-        where: {
-            id,
-        }
-    });
+  const category = await Category.findOne({
+    where: {
+      id,
+    },
+  });
 
-    if (category === null) {
-        return null;
-    }
+  if (category === null) {
+    return null;
+  }
 
-    return {
-        id: category.id,
-        title: category.title,
-        description: category.description,
-    };
-}
+  return {
+    id: category.id,
+    title: category.title,
+    description: category.description,
+  };
+};
 
 const readAll = async (): Promise<ReadCategoryResult[]> => {
-    const categories = await Category.findAll();
+  const categories = await Category.findAll();
 
-    return categories.map((c) => {
-        return {
-            id: c.id,
-            title: c.title,
-            description: c.description,
-        };
-    });
-}
+  return categories.map((c) => {
+    return {
+      id: c.id,
+      title: c.title,
+      description: c.description,
+    };
+  });
+};
 
-const create = async (payload: CreateCategoryPayload): Promise<ReadCategoryResult | null> => {
-    const category = await Category.create(payload as any);
+const create = async (
+  payload: CreateCategoryPayload
+): Promise<ReadCategoryResult | null> => {
+  const category = await Category.create(payload as any);
 
-    return readOne(category.id);
-}
+  return readOne(category.id);
+};
 
-const update = async (payload: UpdateCategoryPayload): Promise<ReadCategoryResult | null> => {
-    const category = await Category.findOne({
-        where: {
-            id: payload.id,
-        }
-    });
-  
-    if (category === null) {
-        return null;
-    }
+const update = async (
+  payload: UpdateCategoryPayload
+): Promise<ReadCategoryResult | null> => {
+  const category = await Category.findOne({
+    where: {
+      id: payload.id,
+    },
+  });
 
-    if (payload.title) {
-        category.title = payload.title;
-    }
+  if (category === null) {
+    return null;
+  }
 
-    if (payload.description) {
-        category.description = payload.description;
-    }
+  if (payload.title) {
+    category.title = payload.title;
+  }
 
-    await category.save();
+  if (payload.description) {
+    category.description = payload.description;
+  }
 
-    return readOne(category.id);
-}
+  await category.save();
+
+  return readOne(category.id);
+};
 
 export const CRUD = {
-    readAll,
-    readOne,
-    create,
-    update,
+  readAll,
+  readOne,
+  create,
+  update,
 };

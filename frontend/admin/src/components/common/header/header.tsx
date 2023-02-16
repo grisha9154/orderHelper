@@ -26,6 +26,10 @@ const tabs = [
     title: "Товары",
     path: Path.PRODUCT,
   },
+  {
+    title: "Категории расходов",
+    path: Path.EXPENSE_CATEGORY,
+  },
 ];
 
 const tabsForAuth = [

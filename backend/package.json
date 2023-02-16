@@ -5,7 +5,9 @@
   "scripts": {
     "start": "tsc && node dist/app.js",
     "build": "tsc",
-    "dev": "nodemon"
+    "dev": "nodemon src/app.ts",
+    "generate-api:widlberries": "node ./src/external-api/wildberries/openapi-generator.js",
+    "generate-api:alfa": "node ./src/external-api/alfa-bank/openapi-generator.js"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -29,6 +31,8 @@
     "ts-node": "^10.4.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.13"
+    "@types/cors": "^2.8.13",
+    "openapi-typescript-codegen": "^0.23.0",
+    "prettier": "^2.8.3"
   }
 }

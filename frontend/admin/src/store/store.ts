@@ -5,12 +5,14 @@ import { categoryApi } from "./category";
 import { productApi } from "./products";
 import { setupListeners } from "@reduxjs/toolkit/dist/query/react";
 import { userApi, userReducer } from "./user";
+import { expenseApi } from "./expense";
 
 const reducer = combineReducers({
   user: userReducer,
   [userApi.reducerPath]: userApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
   [categoryApi.reducerPath]: categoryApi.reducer,
+  [expenseApi.reducerPath]: expenseApi.reducer,
 });
 
 export const store = configureStore({
@@ -21,7 +23,8 @@ export const store = configureStore({
     })
       .concat(userApi.middleware)
       .concat(productApi.middleware)
-      .concat(categoryApi.middleware),
+      .concat(categoryApi.middleware)
+      .concat(expenseApi.middleware),
 });
 
 setupListeners(store.dispatch);
